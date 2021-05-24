@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レシピ提案BOT</title>
+</head>
+<body>
+    <!-- HTML表示 -->
+    <h1>レシピの検索</h1>   
+        <input id="search-input" type="text">
+        <button id="btn">検索</button>
+        <div id="output"></div>   
+
+    <!-- jpuery読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- axiosライブラリの読み込み -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 楽天レシピカテゴリ別API -->
+    <script src='https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&applicationId=1030938426681465338' async defer></script>
+    <!-- 楽天レシピカテゴリ一覧API -->
+    <script src='https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?format=json&applicationId=1030938426681465338' async defer></script>
+
+    <script>
+
+    // リクエストを送るurl（カテゴリ別）
+    let url_betsu = 'https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426';
+    // API Key（カテゴリ別）
+    let APIkey_betsu = '?format=json&applicationId=1030938426681465338';
+    // リクエストを送るurl（カテゴリ一覧）
+    let url_ichiran = 'https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426';
+    // API Key（カテゴリ一覧）
+    let APIkey_ichiran = '?format=json&applicationId=1030938426681465338';
+
+    // カテゴリ別
+    $('#btn').on('click',function() {
+            axios.get( url_betsu + APIkey_betsu )
+                .then(function(response){
+                    console.log(response);
+                //      // 画面にタイトルを表示
+                //     const data = [];
+                //     response.data.items.forEach(function(x){
+                //         // タイトル表示
+                //         // data.push(`<p>${x.volumeInfo.title}</p>`);
+                //         // 画像とリンクを表示
+                //         console.log(x.volumeInfo.imageLinks);
+                //         data.push(` <div class="content">
+                //                     <p>${x.volumeInfo.title}</p>
+                //                     <a href="${x.volumeInfo.previewLink}" target="_blank"><img src="${x.volumeInfo.imageLinks.thumbnail}"</a>
+                //                     </div>
+                //                 `)
+                //     });
+                //     $('#output').html(data);
+            })
+            .catch()
+            .finally();
+    });
+
+    // カテゴリ一覧
+    $('#btn').on('click',function() {
+            axios.get( url_ichiran + APIkey_ichiran )
+                .then(function(response){
+                    console.log(response);
+                //      // 画面にタイトルを表示
+                //     const data = [];
+                //     response.data.items.forEach(function(x){
+                //         // タイトル表示
+                //         // data.push(`<p>${x.volumeInfo.title}</p>`);
+                //         // 画像とリンクを表示
+                //         console.log(x.volumeInfo.imageLinks);
+                //         data.push(` <div class="content">
+                //                     <p>${x.volumeInfo.title}</p>
+                //                     <a href="${x.volumeInfo.previewLink}" target="_blank"><img src="${x.volumeInfo.imageLinks.thumbnail}"</a>
+                //                     </div>
+                //                 `)
+                //     });
+                //     $('#output').html(data);
+            })
+            .catch()
+            .finally();
+    });
+
+
+
+    </script>
+    
+</body>
+</html>
