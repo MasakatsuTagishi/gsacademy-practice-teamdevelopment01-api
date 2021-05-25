@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  display: flex;
+}
+li {
+  list-style: none;
+  width: 250px;
+}
+img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+h1 {
+  font-size: 14px;
+}
+p {
+  font-size: 12px;
+}
