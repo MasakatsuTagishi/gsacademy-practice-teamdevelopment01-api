@@ -89,11 +89,17 @@
             response.data.result.small.forEach(function(x){
               console.log(x.categoryName);
               if( $('#search-input').val() == x.categoryName ) {
-                alert('ok');
-                data.push(` 
-                          <p>${x.categoryUrl}</p>
-                          <a href=${x.categoryUrl} target="_blank"></a>
-                          `)
+                console.log(x.categoryUrl);
+                const categoryUrl = x.categoryUrl
+                const Idcode = categoryUrl.substr(38);
+                const idcode = Idcode.slice(0,-1);
+
+                console.log(idcode);
+                // alert('ok');
+                // data.push(` 
+                //           <p>${x.categoryUrl}</p>
+                //           <a href=${x.categoryUrl} target="_blank"></a>
+                //           `)
               }             
             });
           $('#output').html(data); 
