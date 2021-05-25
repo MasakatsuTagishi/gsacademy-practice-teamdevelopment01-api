@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
     <title>レシピ提案BOT</title>
   </head>
   <body>
@@ -11,7 +12,9 @@
     <h1>レシピの検索</h1>
     <input id="search-input" type="text" />
     <button id="btn">検索</button>
-    <div id="output"></div>
+    <ul id="output"></ul>
+
+    
 
     <!-- jpuery読み込み -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -55,7 +58,15 @@
                   const data = [];
                   response.data.result.forEach(function(x){
                     console.log(x.recipeTitle);
-                    data.push(`<p>${x.recipeTitle}</p>`)
+                    data.push(`
+                    <li>
+                    <h1>${x.recipeTitle}</h1>
+                    <p>${x.recipeDescription}</p>
+                    <img src="${x.foodImageUrl}" alt="${x.recipeTitle} 画像">
+                    <a href="${x.recipeUrl}" target="_blank">URL</a>
+                    </li>
+                    
+                    `)
                   });
                   $('#output').html(data)  
                 })                                
