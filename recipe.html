@@ -48,24 +48,25 @@
 
       // カテゴリ別ランキング
       $("#btn").on("click", function () {
+        
         axios
           .get(url_Ranking + APIkey + format + category )
           .then(function (response) {
-            console.log(response.data);
-            //      // 画面にタイトルを表示
-            //     const data = [];
-            //     response.data.items.forEach(function(x){
-            //         // タイトル表示
-            //         // data.push(`<p>${x.volumeInfo.title}</p>`);
-            //         // 画像とリンクを表示
-            //         console.log(x.volumeInfo.imageLinks);
-            //         data.push(` <div class="content">
-            //                     <p>${x.volumeInfo.title}</p>
-            //                     <a href="${x.volumeInfo.previewLink}" target="_blank"><img src="${x.volumeInfo.imageLinks.thumbnail}"</a>
-            //                     </div>
-            //                 `)
-            //     });
-            //     $('#output').html(data);
+              console.log(response.data);
+              //      // 画面にタイトルを表示
+              //     const data = [];
+              //     response.data.items.forEach(function(x){
+              //         // タイトル表示
+              //         // data.push(`<p>${x.volumeInfo.title}</p>`);
+              //         // 画像とリンクを表示
+              //         console.log(x.volumeInfo.imageLinks);
+              //         data.push(` <div class="content">
+              //                     <p>${x.volumeInfo.title}</p>
+              //                     <a href="${x.volumeInfo.previewLink}" target="_blank"><img src="${x.volumeInfo.imageLinks.thumbnail}"</a>
+              //                     </div>
+              //                 `)
+              //     });
+              //     $('#output').html(data);
           })
           .catch(function (error) {
             // リクエスト失敗時の処理(errorにエラー内容が入っている)
@@ -78,11 +79,25 @@
       });
 
       // カテゴリ一覧
-      $("#btn").on("click", function () {
+      $("#btn").on("click", function () {  
+        // console.log($('#search-input').val());      
         axios
-          .get(url_List + "?format=json&applicationId=1030938426681465338" + format)
+          .get(url_List + APIkey + format)
           .then(function (response) {
-            console.log(response.data.result);
+            console.log(response.data.result.small);
+            const data = [];
+            response.data.result.small.forEach(function(x){
+              console.log(x.categoryName);
+              if( $('#search-input').val() == x.categoryName ) {
+                alert('ok');
+                data.push(` 
+                          <p>${x.categoryUrl}</p>
+                          <a href=${x.categoryUrl} target="_blank"></a>
+                          `)
+              }             
+            });
+          $('#output').html(data); 
+                       
             //      // 画面にタイトルを表示
             //     const data = [];
             //     response.data.items.forEach(function(x){
@@ -97,14 +112,14 @@
             //                 `)
             //     });
             //     $('#output').html(data);
-          })
+          })      
           .catch(function (error) {
             // リクエスト失敗時の処理(errorにエラー内容が入っている)
             console.log(error);
           })
           .finally(function () {
             // 成功失敗に関わらず必ず実行
-            console.log("done!");
+            // console.log("done!");
           });
       });
 
