@@ -30,56 +30,55 @@
       // 出力フォーマットバージョン（2を指定すると取得データが見やすくなるらしい）
       const format = "&formatVersion=" + 2;
       //   カテゴリー
-      const category = "&categoryId=12-101-509";
+      const category = "&categoryId=";
 
       //   ＜比嘉メモ＞constの中身変えないといけないので、たぶん最終的にGitHubでマージできなくなりそう。リポジトリ作り直すかー。
 
       // カテゴリ別ランキング ＜比嘉メモ＞ここの処理は下の「カテゴリ一覧」でカテゴリーIDを取得してから、処理を実行しないといけないような気がする（遅らせて実行）
-      $("#btn").on("click", function () {
+
+      // カテゴリ一覧 ＜比嘉メモ＞ここはもうOKのはず
+      $("#btn").on("click", function () {  
+        // console.log($('#search-input').val());      
         axios
-          .get(url_Ranking + APIkey + format + category)
+          .get(url_List + APIkey + format)
           .then(function (response) {
-            console.log(response.data);
-          })
+            // console.log(response.data.result.small);
+            response.data.result.small.forEach(function(x){
+              // console.log(x.categoryName);
+              if( $('#search-input').val() == x.categoryName ) {
+                console.log(x.categoryUrl);
+                const categoryUrl = x.categoryUrl
+                const Idcode = categoryUrl.substr(38);
+                const idcode = Idcode.slice(0,-1);
+                axios.get(url_Ranking + APIkey + format + category + idcode )
+                .then(function (response) {
+                  const data = [];
+                  response.data.result.forEach(function(x){
+                    console.log(x.recipeTitle);
+                    data.push(`<p>${x.recipeTitle}</p>`)
+                  });
+                  $('#output').html(data)  
+                })                                
+                .catch(function (error) {
+                  // リクエスト失敗時の処理(errorにエラー内容が入っている)
+                  console.log(error);
+                })
+                .finally(function () {
+                  // 成功失敗に関わらず必ず実行
+                  console.log("done!");
+                });
+              }             
+            });         
+                                })      
           .catch(function (error) {
             // リクエスト失敗時の処理(errorにエラー内容が入っている)
             console.log(error);
           })
           .finally(function () {
             // 成功失敗に関わらず必ず実行
-            console.log("done!");
+            // console.log("done!");
           });
-      });
-
-      // カテゴリ一覧 ＜比嘉メモ＞ここはもうOKのはず
-      $("#btn").on("click", function () {
-        // console.log($('#search-input').val());
-        axios
-          .get(url_List + APIkey + format)
-          .then(function (response) {
-            // console.log(response.data.result.small);
-            const data = [];
-            response.data.result.small.forEach(function (x) {
-              // console.log(x.categoryName);
-              if ($("#search-input").val() == x.categoryName) {
-                // console.log(x.categoryUrl);
-                const categoryUrl = x.categoryUrl;
-                const Idcode = categoryUrl.substr(38);
-                const idcode = Idcode.slice(0, -1);
-                console.log(idcode);
-              }
-            });
-            $("#output").html(data);
-          })
-          .catch(function (error) {
-            // リクエスト失敗時の処理(errorにエラー内容が入っている)
-            console.log(error);
-          })
-          .finally(function () {
-            // 成功失敗に関わらず必ず実行;
-            console.log("done!");
-          });
-      });
-    </script>
+      });   
+       </script>
   </body>
 </html>
