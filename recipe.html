@@ -42,16 +42,16 @@
       // 出力フォーマットバージョン（2を指定すると取得データが見やすくなるらしい）
       const format = "&formatVersion=" + 2;
       //   カテゴリー
-      const category = "&categoryid=12-101-509";
+      const category = "&categoryId=12-101-509";
 
       //   console.log(url_Ranking + APIkey + format);
 
       // カテゴリ別ランキング
       $("#btn").on("click", function () {
         axios
-          .get(url_Ranking + APIkey + format + category)
+          .get(url_Ranking + APIkey + format + category )
           .then(function (response) {
-            console.log(response.data.result);
+            console.log(response.data);
             //      // 画面にタイトルを表示
             //     const data = [];
             //     response.data.items.forEach(function(x){
@@ -80,7 +80,7 @@
       // カテゴリ一覧
       $("#btn").on("click", function () {
         axios
-          .get(url_List + APIkey + format)
+          .get(url_List + "?format=json&applicationId=1030938426681465338" + format)
           .then(function (response) {
             console.log(response.data.result);
             //      // 画面にタイトルを表示
@@ -107,6 +107,8 @@
             console.log("done!");
           });
       });
+
+      const 肉 = 34-10;
     </script>
   </body>
 </html>
