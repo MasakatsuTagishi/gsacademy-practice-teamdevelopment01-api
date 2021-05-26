@@ -14,9 +14,88 @@ function doPost(event) {
   var payload = JSON.stringify({
       "replyToken": replyToken,
       "messages": [{
-        "type": "text",
-        "text": "は？「"+userMessage+"」？うっざby上薗"
-      }]
+  "type": "template",
+  "altText": "通知などに表示される文字列",
+  "template": {
+      "type": "carousel",
+      "columns": [
+          {
+            "thumbnailImageUrl": "https://image.space.rakuten.co.jp/d/strg/ctrl/3/764ffd6d0fd4e0be5c41cea14351557bf1b2232e.23.1.3.2.jpg",
+            "imageBackgroundColor": "#FFFFFF",
+            "title": "タイトルの文字列（最大40文字）",
+            "text": "は？「"+userMessage+"」？うっざby上薗",
+            "defaultAction": {
+                "type": "uri",
+                "label": "View detail",
+                "uri": "https://recipe.rakuten.co.jp/recipe/1750000111/"
+            },
+            "actions": [
+                {
+                    "type": "uri",
+                    "label": "アクション部分のテキスト",
+                    "uri": "https://recipe.rakuten.co.jp/recipe/1750000111/"
+                }
+            ]
+          },
+          {
+            "thumbnailImageUrl": "https://image.space.rakuten.co.jp/d/strg/ctrl/3/764ffd6d0fd4e0be5c41cea14351557bf1b2232e.23.1.3.2.jpg",
+            "imageBackgroundColor": "#FFFFFF",
+            "title": "タイトルの文字列（最大40文字）",
+            "text": "は？「"+userMessage+"」？うっざby上薗",
+            "defaultAction": {
+                "type": "uri",
+                "label": "View detail",
+                "uri": "https://recipe.rakuten.co.jp/recipe/1750000111/"
+            },
+            "actions": [
+                {
+                    "type": "uri",
+                    "label": "アクション部分のテキスト",
+                    "uri": "https://recipe.rakuten.co.jp/recipe/1750000111/"
+                }
+            ]
+          },
+                  {
+            "thumbnailImageUrl": "https://image.space.rakuten.co.jp/d/strg/ctrl/3/764ffd6d0fd4e0be5c41cea14351557bf1b2232e.23.1.3.2.jpg",
+            "imageBackgroundColor": "#FFFFFF",
+            "title": "タイトルの文字列（最大40文字）",
+            "text": "は？「"+userMessage+"」？うっざby上薗",
+            "defaultAction": {
+                "type": "uri",
+                "label": "View detail",
+                "uri": "https://recipe.rakuten.co.jp/recipe/1750000111/"
+            },
+            "actions": [
+                {
+                    "type": "uri",
+                    "label": "アクション部分のテキスト",
+                    "uri": "https://recipe.rakuten.co.jp/recipe/1750000111/"
+                }
+            ]
+          },
+          {
+            "thumbnailImageUrl": "https://image.space.rakuten.co.jp/d/strg/ctrl/3/764ffd6d0fd4e0be5c41cea14351557bf1b2232e.23.1.3.2.jpg",
+            "imageBackgroundColor": "#FFFFFF",
+            "title": "タイトルの文字列（最大40文字）",
+            "text": "は？「"+userMessage+"」？うっざby上薗",
+            "defaultAction": {
+                "type": "uri",
+                "label": "View detail",
+                "uri": "https://recipe.rakuten.co.jp/recipe/1750000111/"
+            },
+            "actions": [
+                {
+                    "type": "uri",
+                    "label": "アクション部分のテキスト",
+                    "uri": "https://recipe.rakuten.co.jp/recipe/1750000111/"
+                }
+            ]
+          }
+      ],
+      "imageAspectRatio": "rectangle",
+      "imageSize": "cover"
+  }
+}]
   });
 
   //４．送信
