@@ -5,7 +5,7 @@
 
 body {
   font-family:"ヒラギノ丸ゴ Pro W4","ヒラギノ丸ゴ Pro","Hiragino Maru Gothic Pro","HG丸ｺﾞｼｯｸM-PRO","HGMaruGothicMPRO";
-  background-image: url(野菜.jpeg);
+  background-image: url(背景.jpeg);
   background-size: cover;
   font-size: 20px;
 }
@@ -84,3 +84,5 @@ p {
   width: 60px;
   height: 35px;
 }
+
+/* プッシュ用 */
