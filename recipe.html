@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>レシピ提案BOT</title>
   </head>
   <body>
@@ -40,25 +40,26 @@
       // カテゴリ別ランキング ＜比嘉メモ＞ここの処理は下の「カテゴリ一覧」でカテゴリーIDを取得してから、処理を実行しないといけないような気がする（遅らせて実行）
 
       // カテゴリ一覧 ＜比嘉メモ＞ここはもうOKのはず
-      $("#btn").on("click", function () {  
-        // console.log($('#search-input').val());      
+      $("#btn").on("click", function () {
+        // console.log($('#search-input').val());
         axios
           .get(url_List + APIkey + format)
           .then(function (response) {
             // console.log(response.data.result.small);
-            response.data.result.small.forEach(function(x){
+            response.data.result.small.forEach(function (x) {
               // console.log(x.categoryName);
-              if( $('#search-input').val() == x.categoryName ) {
+              if ($("#search-input").val() == x.categoryName) {
                 console.log(x.categoryUrl);
-                const categoryUrl = x.categoryUrl
+                const categoryUrl = x.categoryUrl;
                 const Idcode = categoryUrl.substr(38);
-                const idcode = Idcode.slice(0,-1);
-                axios.get(url_Ranking + APIkey + format + category + idcode )
-                .then(function (response) {
-                  const data = [];
-                  response.data.result.forEach(function(x){
-                    console.log(x.recipeTitle);
-                    data.push(`
+                const idcode = Idcode.slice(0, -1);
+                axios
+                  .get(url_Ranking + APIkey + format + category + idcode)
+                  .then(function (response) {
+                    const data = [];
+                    response.data.result.forEach(function (x) {
+                      console.log(x.recipeTitle);
+                      data.push(`
                     <li>
                     <h3>${x.recipeTitle}</h3>
                     <div class="recipeDescription">${x.recipeDescription}</div>
@@ -66,35 +67,36 @@
                     <a href="${x.recipeUrl}" target="_blank">⏩レシピへGO</a>
                     </li>
                     
-                    `)
+                    `);
+                    });
+                    $("#output").html(data);
+                  })
+                  .catch(function (error) {
+                    // リクエスト失敗時の処理(errorにエラー内容が入っている)
+                    console.log(error);
+                  })
+                  .finally(function () {
+                    // 成功失敗に関わらず必ず実行
+                    console.log("done!");
                   });
-                  $('#output').html(data)  
-                })                                
-                .catch(function (error) {
-                  // リクエスト失敗時の処理(errorにエラー内容が入っている)
-                  console.log(error);
-                })
-                .finally(function () {
-                  // 成功失敗に関わらず必ず実行
-                  console.log("done!");
-                });
-              }             
+              }
             });
-            
+
             // console.log(response.data.result.medium);
-            response.data.result.medium.forEach(function(x){
+            response.data.result.medium.forEach(function (x) {
               // console.log(x.categoryName);
-              if( $('#search-input').val() == x.categoryName ) {
+              if ($("#search-input").val() == x.categoryName) {
                 console.log(x.categoryUrl);
-                const categoryUrl = x.categoryUrl
+                const categoryUrl = x.categoryUrl;
                 const Idcode = categoryUrl.substr(38);
-                const idcode = Idcode.slice(0,-1);
-                axios.get(url_Ranking + APIkey + format + category + idcode )
-                .then(function (response) {
-                  const data = [];
-                  response.data.result.forEach(function(x){
-                    console.log(x.recipeTitle);
-                    data.push(`
+                const idcode = Idcode.slice(0, -1);
+                axios
+                  .get(url_Ranking + APIkey + format + category + idcode)
+                  .then(function (response) {
+                    const data = [];
+                    response.data.result.forEach(function (x) {
+                      console.log(x.recipeTitle);
+                      data.push(`
                     <li>
                     <h3>${x.recipeTitle}</h3>
                     <div class="recipeDescription">${x.recipeDescription}</div>
@@ -102,21 +104,21 @@
                     <a href="${x.recipeUrl}" target="_blank">⏩レシピへGO</a>
                     </li>
                     
-                    `)
+                    `);
+                    });
+                    $("#output").html(data);
+                  })
+                  .catch(function (error) {
+                    // リクエスト失敗時の処理(errorにエラー内容が入っている)
+                    console.log(error);
+                  })
+                  .finally(function () {
+                    // 成功失敗に関わらず必ず実行
+                    console.log("done!");
                   });
-                  $('#output').html(data)  
-                })                                
-                .catch(function (error) {
-                  // リクエスト失敗時の処理(errorにエラー内容が入っている)
-                  console.log(error);
-                })
-                .finally(function () {
-                  // 成功失敗に関わらず必ず実行
-                  console.log("done!");
-                });
-              }             
-            });         
-          })      
+              }
+            });
+          })
           .catch(function (error) {
             // リクエスト失敗時の処理(errorにエラー内容が入っている)
             console.log(error);
@@ -125,7 +127,7 @@
             // 成功失敗に関わらず必ず実行
             // console.log("done!");
           });
-      });   
-       </script>
+      });
+    </script>
   </body>
 </html>
